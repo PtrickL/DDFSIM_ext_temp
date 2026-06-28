@@ -1,8 +1,7 @@
 # DDFSIM Add-ons
 
 This is a temporary repository which contains the Python-based extensions for DDFSIM, consisting of a Crosstalk Fault Generator and a Structure-Aware Identifier.
-
-Because these tools are add-ons to the original DDFSIM, they must be merged into a working DDFSIM environment before execution.
+Because these tools are add-ons to the original DDFSIM, they MUST be merged into a working DDFSIM environment before execution.
 
 ## 1. Environment Setup
 
@@ -34,7 +33,7 @@ DDFSIM-MAIN/
 └── README.md
 ```
 
-Note that `benchmarks/` Contains the `.qasm` test circuits and pre-generated golden crosstalk fault lists (`*_CTFgolden.json`); and `experiments/` Contains the execution scripts (`generate_crosstalk.py`, `Identifier_update.py`, etc.).
+Note that `benchmarks/` contains the `.qasm` test circuits and pre-generated golden crosstalk fault lists (`*_CTFgolden.json`); and `experiments/` contains the execution scripts (`generate_crosstalk.py`, `Identifier_update.py`, etc.).
 
 
 ## 2. Crosstalk Fault Generator
@@ -50,7 +49,6 @@ python ./experiments/generate_crosstalk.py <qasm_file> [--distance D] [--angles 
 * `qasm_file`: Required, the path to the target quantum circuit (e.g., `./benchmarks/3cxx.qasm`). 
 * `--distance`: Optional, the distance threshold $D$ on the backend coupling map. Default is 1. 
 * `--angles`: Optional, a comma separated list of $R_z$ rotation fault magnitudes. Default is `pi/5,2*pi/5,3*pi/5,4*pi/5,pi`. 
-
 This should output a breakdown report in terminal and an output file `./benchmarks/*_ctf.json`. 
 
 ## 3. Structure-Aware Identifier
@@ -70,7 +68,6 @@ python ./experiments/Identifier_update.py <path_to_circuit.qasm> <path_to_faults
 ```
 * `path_to_circuit.qasm`: Required, the target circuit. 
 * `path_to_faults.json`: Required, the fault list generated in the previous step. 
-
 This should output the routing plan and display the final execution time overhead.
 
 ### Automated Performance Comparison
@@ -82,7 +79,6 @@ The two automated benchmarking scripts are included to compare the dynamic Ident
 ```bash
 python ./experiments/test_existing_faults.py
 ```
-
 This should iterate through the `benchmarks/` folder, run all fixed simulators alongside the Identifier, and print a performance comparison table. The Identifier is expected to outperform the fixed baselines.
 
 #### Test against Hardware Crosstalk Faults: 
@@ -90,5 +86,4 @@ This should iterate through the `benchmarks/` folder, run all fixed simulators a
 ```bash
 python ./experiments/testCT.py
 ```
-
 This should automatically call the Crosstalk Generator, then run the simulation engines to compare execution times. 
