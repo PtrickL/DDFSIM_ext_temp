@@ -14,6 +14,7 @@ Because these tools are add-ons to the original DDFSIM, they MUST be merged into
 ### Step-by-Step File Merging
 
 To run the experiments, move the files from this repository into the corresponding folders of your main DDFSIM directory. 
+Also, overwrite `src/main_statevector.cpp` with the one provided in this repository.
 
 The final DDFSIM file tree should look like this after merging:
 
@@ -29,11 +30,22 @@ DDFSIM-MAIN/
 │   ├── Identifier_update.py        <-- (Copied from add-on)
 │   └── ...
 ├── src/
-├── CMakeLists.txt
+│   └── main_statevector.cpp        <-- (Overwrites original DDFSIM file)├── CMakeLists.txt
 └── README.md
 ```
 
-Note that `benchmarks/` contains the `.qasm` test circuits and pre-generated golden crosstalk fault lists (`*_CTFgolden.json`); and `experiments/` contains the execution scripts (`generate_crosstalk.py`, `Identifier_update.py`, etc.).
+Note that `benchmarks/` Contains the `.qasm` test circuits and pre-generated golden crosstalk fault lists (`*_CTFgolden.json`); and `experiments/` Contains the execution scripts (`generate_crosstalk.py`, `Identifier_update.py`, etc.).
+
+### Recompile the Backend
+
+Because `main_statevector.cpp` was modified, the C++ simulator must be rebuilt. From the root of the DDFSIM-MAIN directory, run:
+```bash
+mkdir -p build
+cd build
+cmake ..
+make -j4
+cd ..
+```
 
 
 ## 2. Crosstalk Fault Generator
