@@ -171,18 +171,16 @@ int main(int argc, char** argv) {
     
     size_t config_param = (argc > 4) ? std::stoul(argv[4]) : 256;
 
-// =================================================================
+
     // 1. 先讀取所有的錯誤場景 (因為算 Weight 矩陣需要用到它們)
-    // =================================================================
     if (!std::ifstream(json_file).good()) {
         std::cerr << "[Error] Fault file not found: " << json_file << "\n";
         return 1;
     }
     auto scenarios = FaultLoader::load(json_file);
 
-    // =================================================================
-    // 🌟 2. 新增區塊：專門處理 Python 傳來的 MST 權重萃取請求
-    // =================================================================
+
+    //  2. 新增區塊：專門處理 Python 傳來的 MST 權重萃取請求
     if (sim_type == "export_mst_weights") {
         std::cout << "[C++] Received export_mst_weights command. Calculating distance matrix..." << std::endl;
         std::ofstream out("mst_weights.json");

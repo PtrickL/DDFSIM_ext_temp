@@ -157,16 +157,27 @@ def cluster_scenarios_by_weight(scenarios, weight_matrix, debug=True):
 def run_simulation_chunk(exec_path, qasm_file, chunk_json_path, sim, shots):
     bs = OPTIMAL_BS_MAP.get(sim, 128)
     cmd = [exec_path, qasm_file, chunk_json_path, sim, str(bs), str(shots)]
-    expected_dynamic = f"results_{sim}.json"
-    expected_sv = f"sv_results_{sim}.json"
+    
+    FILE_SUFFIX_MAP = {
+        "ps": "PrefixSuffix",
+        "cawst": "CAWST",
+        "update_cawst": "Update_CAWST",
+        "segment": "SegmentTree",
+        "checkpoint": "Checkpoint",
+        "update_segment": "Update_SegmentTree", 
+        "direct": "Direct"
+    }
+    
+    actual_suffix = FILE_SUFFIX_MAP.get(sim, sim)
+    
+    expected_dynamic = f"results_{actual_suffix}.json"
+    expected_sv = f"sv_results_{actual_suffix}.json"
 
     for old_file in [expected_dynamic, expected_sv]:
         if os.path.exists(old_file): os.remove(old_file)
         
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=3600)
-        if result.returncode != 0:
-            return None, 0.0, 0.0
             
         build_time_ms = 0.0
         sim_time_ms = 0.0
