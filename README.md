@@ -9,7 +9,7 @@ Because these tools are add-ons to the original DDFSIM, they MUST be merged into
 
 * **Python:** 3.10+
 * **Packages:** `qiskit`, `qiskit-ibm-runtime`, `numpy`
-* **DDFSIM Core:** A compiled DDFSIM environment
+* **DDFSIM Core**
 
 ### Step-by-Step File Merging
 
@@ -60,7 +60,8 @@ python ./experiments/generate_crosstalk.py <qasm_file> [--distance D] [--angles 
 ```
 * `qasm_file`: Required, the path to the target quantum circuit (e.g., `./benchmarks/3cxx.qasm`). 
 * `--distance`: Optional, the distance threshold $D$ on the backend coupling map. Default is 1. 
-* `--angles`: Optional, a comma separated list of $R_z$ rotation fault magnitudes. Default is `pi/5,2*pi/5,3*pi/5,4*pi/5,pi`. 
+* `--angles`: Optional, a comma separated list of $R_z$ rotation fault magnitudes. Default is `pi/5,2*pi/5,3*pi/5,4*pi/5,pi`.
+
 This should output a breakdown report in terminal and an output file `./benchmarks/*_ctf.json`. 
 
 ## 3. Structure-Aware Identifier
