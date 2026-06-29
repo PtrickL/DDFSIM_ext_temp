@@ -79,7 +79,7 @@ The two automated benchmarking scripts are included to compare the dynamic Ident
 ```bash
 python ./experiments/test_existing_faults.py
 ```
-This should iterate through the `benchmarks/` folder, run all fixed simulators alongside the Identifier, and print a performance comparison table. The Identifier is expected to outperform the fixed baselines.
+This should iterate through the `benchmarks/` folder, run all fixed simulators alongside the Identifier, and print a performance comparison table. The Identifier is expected to outperform the fixed baselines in deeper circuits.
 
 #### Test against Hardware Crosstalk Faults: 
 
