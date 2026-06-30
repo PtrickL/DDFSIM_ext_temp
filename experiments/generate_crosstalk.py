@@ -153,7 +153,7 @@ class MergedCrosstalkExporter:
                     scenario.append({
                         "faulty_matrix": self._matrix_to_json(mat),
                         "gate_index":    int(v_op["idx"]),
-                        "target_qubits": [self.num_qubits - 1 - int(q) for q in victim_op["qs"]],
+                        "target_qubits": [int(q) for q in v_op["qs"][::-1]],
                         "type":          "Z",
                     })
                 final_json.append(scenario)
